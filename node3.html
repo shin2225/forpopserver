@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - Shin22</title>
+  <link rel="stylesheet" href="styles/style.css">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #ffffff;
+      color: rgb(0, 0, 0);
+      font-family: sans-serif;
+    }
+    #canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1; /* 背景として配置 */
+    }
+    header, main, footer {
+      position: relative;
+      z-index: 1; /* 背景の上に表示 */
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <header>
+    <h1>Shin's Website</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h2>About Me</h2>
+    <img src="logo.jpg" alt="Shin's Profile Photo" width="150" style="border-radius: 50%; margin-bottom: 1rem;">
+    <p>こんにちは、Shin22です。<br>
+       物理、プログラミングが好きです。<br>
+       このページでは自己紹介や活動をまとめています。</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Shin22's Website</p>
+  </footer>
+
+  <script>
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    function resizeCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(dpr, dpr);
+    }
+
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    let width = () => window.innerWidth;
+    let height = () => window.innerHeight;
+
+    class Node {
+      constructor(x, y, radius, color) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.color = color;
+        this.dx = (Math.random() - 0.5) * 0.5;
+        this.dy = (Math.random() - 0.5) * 0.5;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+      update() {
+        if (this.x + this.radius > width() || this.x - this.radius < 0) this.dx = -this.dx;
+        if (this.y + this.radius > height() || this.y - this.radius < 0) this.dy = -this.dy;
+        this.x += this.dx;
+        this.y += this.dy;
+      }
+    }
+
+    const nodes = [];
+    const nodeCount = 100;
+    const maxDist = 150;
+
+    for (let i = 0; i < nodeCount; i++) {
+      const x = Math.random() * width();
+      const y = Math.random() * height();
+      const radius = Math.random() * 2 + 1;
+      const color = "rgba(200,200,200,0.8)";
+      nodes.push(new Node(x, y, radius, color));
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, width(), height());
+
+      for (let i = 0; i < nodes.length; i++) {
+        nodes[i].update();
+        nodes[i].draw();
+
+        for (let j = i + 1; j < nodes.length; j++) {
+          const node1 = nodes[i];
+          const node2 = nodes[j];
+          const dx = node1.x - node2.x;
+          const dy = node1.y - node2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < maxDist) {
+            const alpha = 1 - dist / maxDist;
+            ctx.beginPath();
+            ctx.moveTo(node1.x, node1.y);
+            ctx.lineTo(node2.x, node2.y);
+            ctx.strokeStyle = `rgba(200,200,200,${alpha})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    animate();
+  </script>
+</body>
+</html>

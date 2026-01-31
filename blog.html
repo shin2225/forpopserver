@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Blog</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="contact.html">Contact</a></li>
+		<li><a href="blog.html">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <section id="blog-list">
+        <h2>記事一覧</h2>
+        <ul>
+            <li><a href="blog/article1.html">このブログについて</a></li>
+            <!-- ここに記事を追加していく -->
+        </ul>
+    </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 My Website</p>
+    </footer>
+    <script>
+        document.addEventListener("keydown", function(event) {
+            if (event.ctrlKey && event.shiftKey && event.key === "S") {
+                window.location.href = "secret404.html";
+            }
+        });
+    </script>
+</body>
+</html>
