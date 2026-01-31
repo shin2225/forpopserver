@@ -3,31 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Contact - Shin22</title>
     <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* Node 6 専用スタイル */
+        body { 
+            margin: 0; 
+            background: #0f2027; /* 深い緑黒 */
+            color: #fff;
+        }
+        #canvas-bg { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; 
+        }
+        
+        /* ヘッダー・フッター */
+        header, footer { 
+            background: rgba(15, 32, 39, 0.9); 
+            backdrop-filter: blur(5px);
+        }
+        header nav a { color: #fff; }
+
+        /* 中央のコンタクトボックス */
+        main {
+            text-align: center;
+            /* 背景を少し透過させてCanvasを見せる */
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            padding: 4rem 2rem;
+            margin-top: 10vh; /* 少し下に下げる */
+            border: 1px solid #4facfe; /* 水色の枠線 */
+            box-shadow: 0 0 50px rgba(79, 172, 254, 0.2); /* ポワーっと光る影 */
+            max-width: 600px;
+        }
+
+        h2 { 
+            color: #4facfe; 
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* リンクのデザイン */
+        a.contact-link {
+            display: inline-block;
+            color: #fff;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+        }
+        a.contact-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 25px rgba(79, 172, 254, 0.6);
+        }
+        
+        .sub-text {
+            margin-top: 2rem;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
+    <canvas id="canvas-bg"></canvas>
+
     <header>
-        <h1>Blog</h1>
+        <h1>Contact</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="works.html">Works</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="contact.html">Contact</a></li>
-		<li><a href="blog.html">Blog</a></li>
+                <li><a href="node3.html">Profile</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
-        <section id="blog-list">
-            <h2>お問い合わせ</h2>
-        </section>
-        <p>コメントなどは各種snsにてお待ちしております。<br>連絡先:https://x.com/shumishin_info</p>
+        <h2>Get in Touch</h2>
+        <p style="font-size: 1.1rem; line-height: 1.8;">
+            お問い合わせ、メッセージは<br>
+            X (旧Twitter) のDMにて受け付けています。
+        </p>
+        
+        <br><br>
+        
+        <a href="https://x.com/shumishin_info" target="_blank" class="contact-link">
+            Open X (Twitter) DM
+        </a>
+
+        <p class="sub-text">
+            @shumishin_info<br>
+            Usually reply within 24 hours.
+        </p>
     </main>
+
     <footer>
-        <p>&copy; 2025 My Website</p>
+        <p>&copy; 2025 Shin's Monologue</p>
     </footer>
-    <script src="scripts/blog.js"></script>
+
+    <script>
+        /**
+         * NODE 6: Radar / Ripple
+         * マウスの位置から波紋が広がり、通信しているようなエフェクト
+         */
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        
+        let w, h;
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // マウス位置（初期値は画面中央）
+        const mouse = { x: w/2, y: h/2 };
+        window.addEventListener('mousemove', e => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+
+        const ripples = [];
+        
+        function animate() {
+            // 背景を塗りつぶすが、少し透明度を残して「残像」を作る
+            ctx.fillStyle = 'rgba(15, 32, 39, 0.2)'; 
+            ctx.fillRect(0, 0, w, h);
+
+            // 一定確率で新しい波紋をマウス位置に発生させる
+            if (Math.random() < 0.05) {
+                ripples.push({ 
+                    x: mouse.x, 
+                    y: mouse.y, 
+                    r: 0,        // 半径
+                    opacity: 1,  // 透明度
+                    speed: 2     // 広がる速度
+                });
+            }
+
+            // 波紋の描画と更新
+            for (let i = 0; i < ripples.length; i++) {
+                const ring = ripples[i];
+                ring.r += ring.speed;
+                ring.opacity -= 0.015; // 徐々に消える
+
+                ctx.beginPath();
+                ctx.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(79, 172, 254, ${ring.opacity})`;
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // 消えたら配列から削除
+                if (ring.opacity <= 0) {
+                    ripples.splice(i, 1);
+                    i--;
+                }
+            }
+            
+            // おまけ：マウス位置に小さなターゲットを描画
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, 5, 0, Math.PI*2);
+            ctx.fillStyle = '#4facfe';
+            ctx.fill();
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>

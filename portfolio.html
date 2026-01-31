@@ -3,67 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - My Website</title>
+    <title>Portfolio - Shin22</title>
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Node 5 専用スタイル */
+        body { 
+            margin: 0; 
+            background: #1a1a2e; /* 深い青 */
+            color: #fff;
+        }
+        #canvas-bg { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; 
+        }
+
+        header, footer { 
+            background: rgba(26, 26, 46, 0.85); 
+            backdrop-filter: blur(5px);
+        }
+        header nav a { color: #fff; }
+        
+        .portfolio-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 4rem; /* 下に余白を追加 */
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, background 0.3s;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .service-card i {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #e94560;
+        }
+        .service-card h3 { margin: 0.5rem 0; font-size: 1.4rem; }
+        .service-card p { color: #ccc; font-size: 0.9rem; margin-top: 0; }
+        
+        .service-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            height: 100%;
+        }
+
+        /* ★新しく追加したメモエリアのスタイル */
+        .info-memo-area {
+            max-width: 700px;
+            margin: 0 auto; /* 中央寄せ */
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.2); /* 少し暗く */
+            border: 1px dashed rgba(233, 69, 96, 0.3); /* 点線の枠 */
+            border-radius: 8px;
+        }
+        .info-memo-area h3 {
+            color: #e94560;
+            border-left: 4px solid #e94560;
+            padding-left: 10px;
+            margin-top: 0;
+        }
+        .info-memo-list {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        .info-memo-list li {
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        .info-memo-list li i {
+            margin-right: 10px;
+            color: #e94560;
+            width: 20px;
+            text-align: center;
+        }
+        .small-note {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
+    <canvas id="canvas-bg"></canvas>
+
     <header>
         <h1>Portfolio</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="works.html">Works</a></li>
+                <li><a href="portfolio.html" class="active">Portfolio</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><a href="node3.html">Profile</a></li>
             </ul>
         </nav>
     </header>
+
     <main>
         <section>
-            <h2>経歴・プロフィール</h2>
-            <p>理系学生として日々修行中</p>
-        </section>
-        <section>
-            <h2>ポートフォリオ作品</h2>
-            <img src="images/portfolio-sample.jpg" alt="ポートフォリオ作品" width="100%">
-        </section>
-        <section>
-            <h2>フォロー・全体の情報・連絡はこちら</h2>
+            <h2 style="border-bottom: 2px solid #e94560; display:inline-block; padding-bottom:5px;">External Activities</h2>
+            <p>外部プラットフォームでの活動拠点一覧です。</p>
             
-            <div class="social-links">
-                 <a href="https://x.com/shumishin_info" target="_blank" >
-                <i class="fa-brands fa-x-twitter"></i> X(情報)
-                </a>
-             </div>
-             <h2>作品へのリンク</h2>
-             <div class="social-links">
+            <div class="portfolio-section">
+                <div class="service-card">
+                    <a href="https://note.com/shinsblog" target="_blank">
+                        <i class="fa-solid fa-book"></i>
+                        <h3>Note</h3>
+                        <p>日記、技術メモ、思考の記録</p>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="https://x.com/shumishin_info" target="_blank">
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <h3>X (Twitter)</h3>
+                        <p>最新情報の更新、日常のつぶやき</p>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="https://drive.google.com/drive/folders/1ZPQBxIkL9JW-vELqxuobzPQqY6iGGKy-?usp=sharing" target="_blank">
+                        <i class="fa-brands fa-google-drive"></i>
+                        <h3>Google Drive</h3>
+                        <p>公開ファイル、素材の配布場所</p>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="https://app.box.com/s/301t3oxhsjw0ob87nll2k47o3h8wupzb" target="_blank">
+                        <i class="fa-solid fa-box"></i>
+                        <h3>Box</h3>
+                        <p>アーカイブ、サブストレージ</p>
+                    </a>
+                </div>
+                <div class="service-card">
+                    <a href="https://github.com/shin2225">
+                        <i class="fa-brands fa-github"></i>
+                        <h3>GitHub</h3>
+                        <p>コードリポジトリ</p>
+                    </a>
+                </div>
 
-                <a href="https://note.com/shinsblog" target="_blank" >
-                <i class="fa-solid fa-book"></i> Note 日記など
-                </a>
-                </a>
-                <a href="https://drive.google.com/drive/folders/1ZPQBxIkL9JW-vELqxuobzPQqY6iGGKy-?usp=sharing" target="_blank" >
-                <i class="fa-brands fa-google-drive"></i> Google Drive
-                </a>
-                </div>
-                <h2>準備中</h2>
+                <div class="service-card" style="opacity: 0.6;">
+                    <a href="#" onclick="alert('準備中です'); return false;">
+                        <i class="fa-brands fa-youtube"></i>
+                        <h3>YouTube</h3>
+                        <p>動画コンテンツ (Coming Soon)</p>
+                    </a> </div>
+            </div>
+
+            <div class="info-memo-area">
+                <h3>About Content</h3>
+                <p>私が作成したものの公開場所についてのガイドラインです。</p>
                 
-                <div class="social-links">
-                    <a href="#" onclick="alert('YouTubeは現在準備中です！'); return false;">
-                    <i class="fa-brands fa-youtube"></i> YouTube（準備中）
-                </a>
-                <a href="https://app.box.com/s/301t3oxhsjw0ob87nll2k47o3h8wupzb" target="_blank">
-                <i class="fa-solid fa-box"></i> Box (仮)
-                </a>
-                <a href="#" onclick="alert('GitHubは現在準備中です！'); return false;">
-                <i class="fa-brands fa-github"></i> GitHub（準備中）
-                </a>
-                </div>
+                <ul class="info-memo-list">
+                    <li>
+                        <i class="fa-solid fa-pen-nib"></i>
+                        <span><b>文章・日記</b> ... 主にこのサイト内、または Note / X に投稿します。</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-image"></i>
+                        <span><b>写真・イラスト</b> ... X (Twitter) や Google Drive にアップロードします。</span>
+                    </li>
+                    <li>
+                        <i class="fa-brands fa-github"></i>
+                        <span><b>プログラム</b> ... ソースコード類は GitHub で管理・公開します。</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-atom"></i>
+                        <span><b>数学・物理</b> ... 実験やシミュレーション結果はこのサイトの Works ページに掲載します。</span>
+                    </li>
+                </ul>
+
+                <p class="small-note">
+                    ※ 投稿内容に関して問題や訂正のご依頼があれば、
+                    <a href="contact.html" style="color:#e94560;">Contact</a> ページよりご連絡ください。
+                </p>
+            </div>
+
         </section>
     </main>
+
     <footer>
-        <p>&copy; 2025 My Website</p>
+        <p>&copy; 2025 Shin's Monologue</p>
     </footer>
+
+    <script>
+        /**
+         * NODE 5: Elegant Flow
+         */
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+
+        let w, h;
+        function resize() {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * w;
+                this.y = h + Math.random() * 100; 
+                this.radius = Math.random() * 3 + 1;
+                this.speed = Math.random() * 1 + 0.2; 
+                this.opacity = Math.random() * 0.5 + 0.1;
+                this.drift = (Math.random() - 0.5) * 0.5;
+            }
+            update() {
+                this.y -= this.speed;
+                this.x += this.drift;
+                if (this.y < -50) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(233, 69, 96, ${this.opacity})`;
+                ctx.fill();
+            }
+        }
+
+        const particles = [];
+        for (let i = 0; i < 70; i++) particles.push(new Particle());
+
+        function animate() {
+            ctx.clearRect(0, 0, w, h);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if (dist < 120) { 
+                        const alpha = (1 - dist / 120) * 0.15;
+                        ctx.strokeStyle = `rgba(233, 69, 96, ${alpha})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
 </body>
 </html>
