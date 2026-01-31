@@ -5,29 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Website</title>
     <link rel="stylesheet" href="styles/style.css">
+    <style>
+        /* index.html 専用のスタイル（ここに書けば他のページに影響しません） */
+        
+        /* 中央寄せエリア */
+        .center-box {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+        
+        /* アイコンを丸く、少しリッチに */
+        .center-box img {
+            border-radius: 50%; 
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .center-box img:hover {
+            transform: scale(1.05); /* マウスを乗せると少し拡大 */
+        }
+        
+        /* 最新情報エリア（シンプル・軽量） */
+        .news-section {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+        .news-section h3 {
+            font-size: 1.2rem;
+            color: #444;
+            border-left: 4px solid #333;
+            padding-left: 10px;
+        }
+        
+        /* ニュースリストのデザイン */
+        .news-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .news-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed #eee;
+            font-size: 0.95rem;
+            display: flex;
+            flex-wrap: wrap; /* スマホで見やすく */
+        }
+        .news-date {
+            font-family: monospace; /* 日付を等幅フォントに */
+            color: #666;
+            margin-right: 1.5rem;
+            font-weight: bold;
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Shin's Website</h1>
+        <h1>Shin's Monologue</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="works.html">Works</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="contact.html">Contact</a></li>
-		<li><a href="node3.html">profile</a></li>
+                <li><a href="node3.html">Profile</a></li>
             </ul>
         </nav>
     </header>
-    <main>
-        <section>
-            <h2>Welcome to Shin22's website</h2>
-            <img src="logo.jpg" alt="Shin's Website Logo" width="150">
-            <p>Shinの日記、雑記、ブログ、ポートフォリオを紹介するサイトです。</p>
+    
+    <main class="paper-style">
+        
+        <section class="center-box">
+            <h2>Welcome to Shin's Monologue</h2>
+            <img src="logo.jpg" alt="Shin's Icon" width="150" height="150">
+            <p>
+                shinの部屋へようこそ<br>
+                ここは全ての活動への入り口（Hub）です。
+            </p>
         </section>
+
+        <section class="news-section">
+            <h3>Latest News</h3>
+            <ul class="news-list">
+                <li>
+                    <span class="news-date">2026.02.01</span>
+                    <span>サイトをリニューアルし、Worksページ（実験室）を公開しました</span>
+                </li>
+                <li>
+                    <span class="news-date">2025.01.xx</span>
+                    <span>ポートフォリオページにNoteやDriveへのリンクを追加しました</span>
+                </li>
+                <li>
+                    <span class="news-date">2025.01.xx</span>
+                    <span>サーバーのテスト運用を開始しました</span>
+                </li>
+            </ul>
+        </section>
+
     </main>
+
     <footer>
-        <p>&copy; 2025 Shin's Website</p>
+        <p>&copy; 2025 Shin's Monologue</p>
     </footer>
 </body>
 </html>
