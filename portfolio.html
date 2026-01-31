@@ -100,6 +100,78 @@
             color: #aaa;
             margin-top: 1rem;
         }
+        /* ターミナル風メモエリアのスタイル */
+        .memo-section {
+            margin-top: 4rem;      /* 上のWorksとの間隔 */
+            padding-top: 2rem;
+            border-top: 1px dashed rgba(0, 240, 255, 0.3); /* 区切り線 */
+        }
+        
+        .terminal-window {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #333;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            font-family: 'Courier New', monospace; /* 等幅フォント */
+            overflow: hidden;
+        }
+        
+        .terminal-header {
+            background: #222;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 5px;
+            margin-right: 10px;
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 1.5rem;
+            color: #ddd;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .terminal-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .terminal-body li {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* 行頭に「>」をつける演出 */
+        .terminal-body li::before {
+            content: "> ";
+            color: #00f0ff;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: #00f0ff;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     </style>
 </head>
 <body>

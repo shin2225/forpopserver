@@ -91,6 +91,78 @@
             transition: 0.3s;
         }
         .btn:hover { background: #00f0ff; color: #000; }
+        /* ターミナル風メモエリアのスタイル */
+        .memo-section {
+            margin-top: 4rem;      /* 上のWorksとの間隔 */
+            padding-top: 2rem;
+            border-top: 1px dashed rgba(0, 240, 255, 0.3); /* 区切り線 */
+        }
+        
+        .terminal-window {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #333;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            font-family: 'Courier New', monospace; /* 等幅フォント */
+            overflow: hidden;
+        }
+        
+        .terminal-header {
+            background: #222;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .terminal-dots {
+            display: flex;
+            gap: 5px;
+            margin-right: 10px;
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .terminal-body {
+            padding: 1.5rem;
+            color: #ddd;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .terminal-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .terminal-body li {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* 行頭に「>」をつける演出 */
+        .terminal-body li::before {
+            content: "> ";
+            color: #00f0ff;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 8px;
+            height: 15px;
+            background: #00f0ff;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+        
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     </style>
 </head>
 <body>
@@ -109,7 +181,7 @@
         </nav>
     </header>
 
-    <main>
+<main>
         <section>
             <h2>Laboratory & Archives</h2>
             <p>制作したプログラム、実験的なコード、過去のアーカイブ。</p>
@@ -129,6 +201,31 @@
                     <h3>Physics Sim (Coming Soon)</h3>
                     <p>PythonとWebGLを用いた剛体シミュレーションの実験場。</p>
                     <a href="#" class="btn">Under Construction</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="memo-section">
+            <h2>Future & Random Notes</h2>
+            <p>開発メモ、将来の構想、あるいは独り言。</p>
+
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <span>shin22@lab:~/thoughts</span>
+                </div>
+                
+                <div class="terminal-body">
+                    <ul>
+                        <li>次はReactかThree.jsを使って3D表現にも挑戦してみたい。</li>
+                        <li>物理エンジンの自作、衝突判定のアルゴリズムを勉強しなおすこと。</li>
+                        <li>サーバーのログ監視スクリプトを書きたい...</li>
+                        <li><span style="color:#aaa;">// 最終更新: 2025.02.01</span><span class="cursor"></span></li>
+                    </ul>
                 </div>
             </div>
         </section>
